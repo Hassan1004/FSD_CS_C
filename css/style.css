@@ -1,0 +1,31 @@
+body{
+    background-color:aqua;
+}
+.container{
+    background-color: aquamarine; 
+    height:300px;
+    border:2px solid red;
+    width:800px;
+    margin:40px;  
+    padding: 40px;
+    box-sizing:content-box;
+}
+.child1{
+    background-color: yellow;
+}
+.child2{
+    background-color: blue;
+}
+.child3{
+    background-color: blueviolet;
+}
+
+.child1,.child2,.child3{
+    
+    height:50px;
+    border:1px dotted yellowgreen;
+    width:50px;
+    padding:50px;
+    display: inline-block;
+    
+}
