@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        #joke-container {
+            margin-bottom: 20px;
+        }
+
+        #joke-text {
+            font-size: 18px;
+            color: #444444;
+            margin: 10px 0;
+            min-height: 60px;
+        }
+
+        #char-count {
+            font-size: 14px;
+            color: #888888;
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        #clear-joke-btn {
+            background-color: #d32f2f;
+        }
+
+        #clear-joke-btn:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Joke Generator</h1>
+        <div id="joke-container">
+            <p id="joke-text">Click the button below to get a joke!</p>
+        </div>
+        <p id="char-count">Character count: 0</p>
+        <div class="button-group">
+            <button id="get-joke-btn">Get Joke</button>
+            <button id="clear-joke-btn">Clear Joke</button>
+        </div>
+    </div>
+
+    <script>
+        const jokeApiUrl = 'https://v2.jokeapi.dev/joke/Any';
+
+        // Get references to the elements
+        const jokeText = document.getElementById('joke-text');
+        const charCount = document.getElementById('char-count');
+        const jokeButton = document.getElementById('get-joke-btn');
+        const clearButton = document.getElementById('clear-joke-btn');
+
+        async function fetchJoke() {
+            try {
+                // Fetch a random joke from the API
+                const response = await fetch(jokeApiUrl);
+                const joke = await response.json();
+
+                let jokeContent = '';
+                if (joke.type === "twopart") {
+                    jokeContent = ${joke.setup} - ${joke.delivery};
+                } else {
+                    jokeContent = joke.joke;
+                }
+
+                jokeText.textContent = jokeContent;
+                updateCharCount(jokeContent.length);
+            } catch (error) {
+                jokeText.textContent = "Oops! Couldn't fetch a joke. Please try again later.";
+                updateCharCount(0);
+            }
+        }
+
+        function clearJoke() {
+            jokeText.textContent = "Click the button below to get a joke!";
+            updateCharCount(0);
+        }
+
+        function updateCharCount(count) {
+            charCount.textContent = Character count: ${count};
+        }
+
+        jokeButton.addEventListener('click', fetchJoke);
+        clearButton.addEventListener('click', clearJoke);
+    </script>
+</body>
+</html>

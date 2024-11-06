@@ -1,0 +1,28 @@
+#d1{
+    border-width: 20px;
+    background-color: gray;
+    text-align: center;
+    width: 450px;
+    height: 600px;
+    align-self: center;
+    translate: 530px  200px;
+    justify-content:center ;
+
+}
+#d2{
+    border-color: black;
+    background-color: gainsboro;
+    width: 200px;
+    height: 100px;
+    justify-content:center ;
+    translate: 100px;
+}
+
+#b1{
+    background-color: greenyellow;
+    translate: -50px 40px;
+}
+#b2{
+    background-color: red;
+    translate: 50px 40px;
+}
